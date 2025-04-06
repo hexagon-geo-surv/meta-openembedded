@@ -10,6 +10,7 @@ S = "${WORKDIR}/git"
 SRC_URI = " \
     git://github.com/jthornber/thin-provisioning-tools;branch=main;protocol=https \
     file://0001-Fix-cargo-build-on-riscv32.patch;patchdir=${CARGO_VENDORING_DIRECTORY}/rustix-0.38.34 \
+    file://0001-Use-portable-atomics-crate.patch \
     "
 
 # v1.1.0
