@@ -17,9 +17,9 @@ DEPENDS = "\
 "
 DEPENDS:append:libc-musl = " fts"
 
-SRCREV = "d13e8e4ab2029fa92600b7d1d0da28f8dcc350eb"
+SRCREV = "b12e507090273576d1156342780c7c6d358fa579"
 SRC_URI = "\
-    git://github.com/fluent/fluent-bit.git;branch=3.2;protocol=https \
+    git://github.com/fluent/fluent-bit.git;branch=master;protocol=https \
     file://0001-lib-Do-not-use-private-makefile-targets-in-CMakelist.patch \
     file://0002-flb_info.h.in-Do-not-hardcode-compilation-directorie.patch \
     file://0003-CMakeLists.txt-Revise-init-manager-deduction.patch \
@@ -109,8 +109,8 @@ PACKAGECONFIG[windows-defaults] = "-DFLB_WINDOWS_DEFAULTS=Yes,-DFLB_WINDOWS_DEFA
 # individual plugins then to enable (e.g. using EXTRA_OECMAKE:append = " -DFLB_FOOBAR=ON")
 PACKAGECONFIG[minimal] = "-DFLB_MINIMAL=Yes,-DFLB_MINIMAL=No"
 
-PACKAGECONFIG[in-kafka] = "-DFLB_IN_KAFKA=ON,-DFLB_IN_KAFKA=OFF,librdkafka curl"
-PACKAGECONFIG[out-kafka] = "-DFLB_OUT_KAFKA=ON,-DFLB_OUT_KAFKA=OFF,librdkafka curl"
+PACKAGECONFIG[in-kafka] = "-DFLB_KAFKA=ON -DFLB_IN_KAFKA=ON,-DFLB_KAFKA=OFF -DFLB_IN_KAFKA=OFF,librdkafka curl"
+PACKAGECONFIG[out-kafka] = "-DFLB_KAFKA=ON -DFLB_OUT_KAFKA=ON,-DFLB_KAFKA=OFF -DFLB_OUT_KAFKA=OFF,librdkafka curl"
 
 SYSTEMD_SERVICE:${PN} = "fluent-bit.service"
 
@@ -130,6 +130,9 @@ EXTRA_OECMAKE:append:riscv32 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:riscv64 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 EXTRA_OECMAKE:append:x86 = " -DCMAKE_C_STANDARD_LIBRARIES=-latomic"
 SECURITY_STRINGFORMAT:remove = "${@bb.utils.contains('PACKAGECONFIG', 'aws-error-reporter', '-Werror=format-security', '', d)}"
+
+# GCC-15 uses C23 std and it does not yet compile with C23
+CFLAGS += "-std=gnu17"
 
 do_configure:prepend() {
     sed -i \
