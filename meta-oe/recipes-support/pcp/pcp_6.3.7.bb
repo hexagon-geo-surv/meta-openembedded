@@ -13,12 +13,13 @@ DEPENDS += "perl-native bison-native flex-native python3-native python3-setuptoo
 SRC_URI += "file://0001-Remove-unsuitble-part-for-cross-compile.patch \
             file://pass-options-to-AR.patch \
             file://fix_parallel_make.patch \
+			file://0001-bind2-Use-pmcpp-from-native-builds.patch \
            "
 
 export PCP_DIR = "${RECIPE_SYSROOT_NATIVE}"
 #export PCP_RUN_DIR = "${RECIPE_SYSROOT_NATIVE}"
-EXTRA_OEMAKE = "CC="${CC}" LD="${LD}""
-inherit useradd systemd features_check python3targetconfig
+EXTRA_OEMAKE = 'CC="${CC}" LD="${LD}" CROSS_COMPILING="yes"'
+inherit useradd systemd features_check python3targetconfig gtk-icon-cache
 
 # Needs libx11
 REQUIRED_DISTRO_FEATURES = "x11"
@@ -48,6 +49,7 @@ USERADD_PARAM:${PN}-testsuite = "--system --home ${localstatedir}/lib/pcp/testsu
                        --user-group pcpqa"
 
 RDEPENDS:${PN} += "perl"
+RDEPENDS:${PN}-xsos += "${PN} bash"
 RDEPENDS:${PN}-testsuite += "${PN} bash perl"
 RDEPENDS:python3-${PN} += "${PN} python3"
 
@@ -69,6 +71,7 @@ do_compile:prepend() {
 		${S}/src/include/builddefs
 	sed -i -e "s,TOPDIR)/python3-pcp.list,TOPDIR)/python3-pcp.list --install-lib=${PYTHON_SITEPACKAGES_DIR},g" ${S}/src/python/GNUmakefile
 	export PYTHON=python3
+	export PATH=${PATH}:${RECIPE_SYSROOT_NATIVE}${libexecdir}/pcp/bin
 	#export PYTHON3=${STAGING_BINDIR_NATIVE}/python3-native/python3
 }
 
@@ -99,7 +102,8 @@ do_install () {
 		-e 's#${TMPDIR}##g' ${D}${includedir}/pcp/builddefs
 }
 
-PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
+PACKAGE_BEFORE_PN = "${PN}-xsos"
+PACKAGES =+ " ${PN}-export-zabbix-agent ${PN}-testsuite \
 	libpcp-gui2  libpcp-gui2-dev \
 	libpcp-import1 libpcp-archive1 \
 	libpcp-mmv1 libpcp-mmv1-dev \
@@ -109,7 +113,7 @@ PACKAGES += " ${PN}-export-zabbix-agent ${PN}-testsuite \
 	libpcp3 libpcp3-dev python3-${PN}\
 "
 FILES:libpcp-gui2 = "${libdir}/libpcp_gui.so.2 \
-"	
+"
 FILES:libpcp-archive1 = "${libdir}/libpcp_archive.so.1 \
 "	
 FILES:libpcp-gui2-dev = " \
@@ -118,6 +122,8 @@ FILES:libpcp-gui2-dev = " \
 	${includedir}/pmafm.h \
 	${includedir}/pmtime.h \
 "
+INSANE_SKIP:libpcp-gui2-dev = "staticdev"
+
 FILES:libpcp-mmv1 = " \
 	${libdir}/libpcp_mmv.so.1 \
 "
@@ -130,6 +136,8 @@ FILES:libpcp-mmv1-dev = " \
 	${datadir}/man/man3/mmv_* \
 	${datadir}/man/man5/mmv.5.gz \
 "
+INSANE_SKIP:libpcp-mmv1-dev = "staticdev"
+
 FILES:libpcp-import1 = " \
 	${libdir}/libpcp_import.so.1 \
 "
@@ -145,6 +153,8 @@ FILES:libpcp-pmda3-dev = " \
 	${datadir}/man/man3/PMDA.3.gz \
 	${datadir}/man/man3/pmda* \
 "
+INSANE_SKIP:libpcp-pmda3-dev = "staticdev"
+
 FILES:libpcp-trace2 = " \
 	${libdir}/libpcp_trace.so.2 \
 "
@@ -155,6 +165,8 @@ FILES:libpcp-trace2-dev = " \
 	${libdir}/libpcp_trace.so \
 	${datadir}/man/man3/pmtrace* \
 "
+INSANE_SKIP:libpcp-trace2-dev = "staticdev"
+
 FILES:libpcp-web1 = " \
 	${libdir}/libpcp_web.so.1 \
 "
@@ -166,10 +178,15 @@ FILES:libpcp-web1-dev = " \
 	${datadir}/man/man3/pmhttp* \
 	${datadir}/man/man3/pmjson* \
 "
+INSANE_SKIP:libpcp-web1-dev = "staticdev"
+
 FILES:libpcp3 = " \
 	${libdir}/libpcp.so.3 \
 "
 
+FILES:${PN}-xsos = " \
+	${libexecdir}/pcp/bin/pcp-xsos \
+"
 FILES:${PN} = " \
 	${sysconfdir}/pcp \
 	${sysconfdir}/cron.d \
@@ -179,6 +196,7 @@ FILES:${PN} = " \
 	${datadir}/bash-completion \
 	${datadir}/pcp-gui \
 	${datadir}/zsh \
+	${datadir}/icons \
 	${systemd_system_unitdir}/ \
 	${libdir}/pcp/ \
 	${libdir}/sysusers.d/pcp.conf \
@@ -200,6 +218,8 @@ FILES:${PN}-export-zabbix-agent += " \
 	${mandir}/man3/zbxpcp.3.gz \
 	${libdir}/zabbix \
 "
+INSANE_SKIP:${PN}-export-zabbix-agent = "dev-so"
+
 FILES:${PN}-testsuite = "${localstatedir}/lib/pcp/testsuite/ ${libdir}/sysusers.d/pcp-testsuite.conf"
 FILES:python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}"
 FILES:${PN}-dev += " \
