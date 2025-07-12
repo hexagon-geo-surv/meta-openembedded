@@ -7,7 +7,7 @@ DEPENDS = "expat libxml2 libxml2-native neon neon-native libmusicbrainz-native"
 
 PV = "5.1.0+git"
 
-SRCREV = "4655b571a70d73d41467091f59c518517c956198"
+SRCREV = "4efbed3afae11ef68281816088d7cf3d0f704dfe"
 SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git;branch=master;protocol=https \
            file://0001-http-fetch-Pass-a-non-null-buffer-to-ne_set_request_.patch \
            "
@@ -20,7 +20,15 @@ EXTRA_OECMAKE:append:class-target = " -DIMPORT_EXECUTABLES=${STAGING_LIBDIR_NATI
 do_install:append:class-native() {
     install -Dm 0755 ${B}/src/make-c-interface ${D}${bindir}/make-c-interface
     install -Dm 0644 ${B}/ImportExecutables.cmake ${D}${libdir}/cmake/${BPN}/ImportExecutables.cmake
-    sed -i -e s:'${B}'/src/::g ${D}${libdir}/cmake/${BPN}/ImportExecutables.cmake
+    sed -i -e 's:${B}/src/::g' ${D}${libdir}/cmake/${BPN}/ImportExecutables.cmake
+}
+
+do_compile:prepend:class-target() {
+	install -Dm 0755 ${STAGING_BINDIR_NATIVE}/make-c-interface ${B}/src/make-c-interface
+}
+
+do_compile:append:class-target() {
+	rm -rf ${B}/src/make-c-interface
 }
 
 BBCLASSEXTEND = "native"
