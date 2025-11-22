@@ -144,8 +144,8 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-flask-versioned \
     python3-flask-wtf \
     python3-flask-xstatic \
-    python3-future \
     python3-frozenlist \
+    python3-future \
     python3-gast \
     python3-gcovr \
     python3-geojson \
@@ -216,9 +216,9 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-kiwisolver \
     python3-langtable \
     python3-lazy-object-proxy \
+    python3-ldap \
     python3-libconf \
     python3-license-expression \
-    python3-ldap \
     python3-lockfile \
     python3-lorem \
     python3-lrparsing \
@@ -356,8 +356,8 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-tempdir \
     python3-pytest-timeout \
     python3-pytest-xdist \
-    python3-pythonping \
     python3-python-vlc \
+    python3-pythonping \
     python3-pytoml \
     python3-pytun \
     python3-pyudev \
@@ -421,8 +421,8 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-texttable \
     python3-thrift \
     python3-tinyrecord \
-    python3-tornado \
     python3-toolz \
+    python3-tornado \
     python3-tqdm \
     python3-trafaret \
     python3-trafaret-config \
@@ -508,6 +508,7 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-prettytable-ptest \
     python3-ptyprocess-ptest \
     python3-pyasn1-modules-ptest \
+    python3-pyasn1-ptest \
     python3-pyroute2-ptest \
     python3-pyserial-ptest \
     python3-pytoml-ptest \
@@ -522,8 +523,8 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-soupsieve-ptest \
     python3-sqlparse-ptest \
     python3-typeguard-ptest \
-    python3-ujson-ptest \
     python3-u-msgpack-python-ptest \
+    python3-ujson-ptest \
     python3-unidiff-ptest \
     python3-uritemplate-ptest \
     python3-webcolors-ptest \
@@ -533,7 +534,6 @@ RDEPENDS:packagegroup-meta-python3-ptest = "\
     python3-xxhash-ptest \
     python3-yappi-ptest \
     python3-yarl-ptest \
-    python3-pyasn1-ptest \
 "
 
 EXCLUDE_FROM_WORLD = "1"
