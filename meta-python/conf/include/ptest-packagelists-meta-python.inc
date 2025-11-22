@@ -8,8 +8,8 @@
 # ptests which take less than ~30s each
 PTESTS_FAST_META_PYTHON = "\
     python3-a2wsgi \
-    python3-appdirs \
     python3-ansicolors \
+    python3-appdirs \
     python3-asgiref \
     python3-aspectlib \
     python3-betamax \
@@ -18,11 +18,11 @@ PTESTS_FAST_META_PYTHON = "\
     python3-breathe \
     python3-cachetools \
     python3-cbor2 \
-    python3-configobj \
     python3-click \
+    python3-configobj \
     python3-dasbus \
-    python3-dominate \
     python3-dnspython \
+    python3-dominate \
     python3-evdev \
     python3-execnet \
     python3-fastjsonschema \
@@ -62,16 +62,15 @@ PTESTS_FAST_META_PYTHON = "\
     python3-precise-runner \
     python3-prettytable \
     python3-propcache \
-    python3-pyais \
-    python3-pydantic \
-    python3-pydantic-core \
-    python3-pylint \
-    python3-python-dotenv \
-    python3-python-multipart \
     python3-ptyprocess \
     python3-py-cpuinfo \
+    python3-pyais \
     python3-pyasn1-modules \
     python3-pyasyncore \
+    python3-pydantic \
+    python3-pydantic-core \
+    python3-pydbus \
+    python3-pylint \
     python3-pyroute2 \
     python3-pyserial \
     python3-pytest-httpx \
@@ -79,9 +78,10 @@ PTESTS_FAST_META_PYTHON = "\
     python3-pytest-picked \
     python3-pytest-retry \
     python3-pytest-sugar \
+    python3-python-dotenv \
+    python3-python-multipart \
     python3-pytoml \
     python3-pyyaml-include \
-    python3-pydbus \
     python3-pyzmq \
     python3-pyzstd \
     python3-rapidjson \
@@ -104,9 +104,9 @@ PTESTS_FAST_META_PYTHON = "\
     python3-typeguard \
     python3-typing-inspection \
     python3-tzdata \
+    python3-u-msgpack-python \
     python3-uinput \
     python3-ujson \
-    python3-u-msgpack-python \
     python3-unidiff \
     python3-uritemplate \
     python3-validators \
