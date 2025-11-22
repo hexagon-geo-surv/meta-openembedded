@@ -352,6 +352,7 @@ RDEPENDS:packagegroup-meta-python3 = "\
     python3-pytest-lazy-fixtures \
     python3-pytest-metadata \
     python3-pytest-picked\
+    python3-pytest-retry \
     python3-pytest-tempdir \
     python3-pytest-timeout \
     python3-pytest-xdist \
