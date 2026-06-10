@@ -10,7 +10,7 @@ SRC_URI = "http://files.inria.fr/pacap/${BPN}/${BP}.tar.gz \
            file://0001-Fix-build-when-S-B.patch \
            file://0001-Fix-a-lot-of-Werror-format-security-errors-with-mvwp.patch \
            "
-SRC_URI[sha256sum] = "51c4449c95bba34f16b429729c2f58431490665d8093efaa8643b2e1d1084182"
+SRC_URI[sha256sum] = "a14b1b59ea4856844e27bc4e22129b7906b8815afaf50a25ac60998dafcc93a7"
 
 UPSTREAM_CHECK_URI = "https://team.inria.fr/pacap/software/tiptop/"
 
