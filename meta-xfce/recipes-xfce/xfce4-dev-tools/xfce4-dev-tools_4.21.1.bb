@@ -11,7 +11,7 @@ SRC_URI = "https://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:4]}/${BP}.tar.b
            file://0001-m4macros-Check-for-a-function-provided-by-libX11-in-.patch \
            "
 SRC_URI:append:class-target = " file://0001-Run-native-xdt-csource-on-tests.patch"
-SRC_URI[sha256sum] = "36059f48bbb196645f6514ab5a356e55cdd9bc917edcaf6afd86adfc28d7a358"
+SRC_URI[sha256sum] = "2b127088f22453ffc725c002d2fce830bac86fc770e094d43b45e92e0f132c97"
 
 inherit autotools pkgconfig
 
