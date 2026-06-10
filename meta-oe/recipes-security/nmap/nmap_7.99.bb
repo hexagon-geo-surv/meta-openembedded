@@ -1,19 +1,19 @@
 SUMMARY = "network auditing tool"
 DESCRIPTION = "Nmap (Network Mapper) is a free and open source (license) utility for network discovery and security auditing.\nGui support via appending to IMAGE_FEATURES x11-base in local.conf"
 SECTION = "security"
-LICENSE = "GPL-2.0-only"
+LICENSE = "NPSL"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=b8823a06822788010eae05b4f5e921b3"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=895af8527fe4bcb72f271fd1841fd2f6"
 
 SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
-           file://0001-redefine-the-python-library-install-dir.patch \
-           file://0002-replace-.-shtool-mkdir-with-coreutils-mkdir-command.patch \
-           file://0003-Include-time.h-header-to-pass-clang-compilation.patch \
-           file://0004-Fix-building-with-libc.patch \
-           file://0005-fix-racing-between-build-ncat-and-build-lua.patch \
-           file://0006-Fix-build-with-libpcap-1.10.5.patch \
+           file://nmap-redefine-the-python-library-dir.patch \
+           file://nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch \
+           file://0001-Include-time.h-header-to-pass-clang-compilation.patch \
+           file://0002-Fix-building-with-libc.patch \
+           file://0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch \
+           file://0001-fix-racing-between-build-ncat-and-build-lua.patch \
            "
-SRC_URI[sha256sum] = "a5479f2f8a6b0b2516767d2f7189c386c1dc858d997167d7ec5cfc798c7571a1" 
+SRC_URI[sha256sum] = "df512492ffd108e53a27a06f26d8635bbe89e0e569455dc8ffef058c035d51b2"
 
 UPSTREAM_CHECK_REGEX = "nmap-(?P<pver>\d+(\.\d+)+)\.tar"
 
@@ -22,12 +22,12 @@ inherit autotools-brokensep pkgconfig python3native
 PACKAGECONFIG ?= "pcre ncat nping pcap"
 
 PACKAGECONFIG[pcap] = "--with-pcap=linux, --without-pcap, libpcap, libpcap"
-PACKAGECONFIG[pcre] = "--with-libpcre=${STAGING_LIBDIR}/.., --with-libpcre=included, libpcre"
+PACKAGECONFIG[pcre] = "--with-libpcre=${STAGING_LIBDIR}/.., --with-libpcre=included, libpcre2"
 PACKAGECONFIG[ssl] = "--with-openssl=${STAGING_LIBDIR}/.., --without-openssl, openssl, openssl"
 PACKAGECONFIG[ssh2] = "--with-openssh2=${STAGING_LIBDIR}/.., --without-openssh2, libssh2, libssh2"
 PACKAGECONFIG[libz] = "--with-libz=${STAGING_LIBDIR}/.., --without-libz, zlib, zlib"
 
-# disable/enable packages
+#disable/enable packages
 PACKAGECONFIG[nping] = ",--without-nping,"
 PACKAGECONFIG[ncat] = ",--without-ncat,"
 PACKAGECONFIG[ndiff] = "--with-ndiff=yes,--without-ndiff,python3 python3-setuptools-native"
