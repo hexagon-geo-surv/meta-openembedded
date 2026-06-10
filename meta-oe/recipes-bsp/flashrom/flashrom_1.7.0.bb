@@ -7,7 +7,7 @@ SRC_URI = "https://download.flashrom.org/releases/flashrom-v${PV}.tar.xz \
            file://0002-meson-Add-options-pciutils-ftdi-usb.patch \
            "
 
-SRC_URI[sha256sum] = "8b9db3987df9b5fc81e70189d017905dd5f6be1e1410347f22687ab6d4c94423"
+SRC_URI[sha256sum] = "4328ace9833f7efe7c334bdd73482cde8286819826cc00149e83fba96bf3ab4f"
 
 S = "${UNPACKDIR}/flashrom-v${PV}"
 
