@@ -14,6 +14,6 @@ S = "${UNPACKDIR}/File-Slurp-${PV}"
 
 inherit cpan
 
-SRC_URI[sha256sum] = "ce29ebe995097ebd6e9bc03284714cdfa0c46dc94f6b14a56980747ea3253643"
+SRC_URI[sha256sum] = "4c3c21992a9d42be3a79dd74a3c83d27d38057269d65509a2f555ea0fb2bc5b0"
 
 BBCLASSEXTEND = "native"
