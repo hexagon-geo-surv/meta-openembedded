@@ -8,11 +8,11 @@ LICENSE:${PN}-dev = "BSD-3-Clause"
 LICENSE:${PN}-dbg = "BSD-3-Clause & GPL-3.0-or-later"
 LICENSE:${PN}-spy = "GPL-3.0-or-later"
 LICENSE:${PN}-spy-dev = "GPL-3.0-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=628c01ba985ecfa21677f5ee2d5202f6"
+LIC_FILES_CHKSUM = "file://COPYING;md5=9637dc508442c2f458df6444fca97e09"
 DEPENDS = "autoconf-archive-native flex-native"
 
-SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.bz2"
-SRC_URI[sha256sum] = "f42ee9efa489e9ff5d328baefa26f9c515be65021856e78d99ad1f0ead9ec85d"
+SRC_URI = "https://pcsclite.apdu.fr/files/${BP}.tar.xz"
+SRC_URI[sha256sum] = "59b3c4b5be4ab228698edeb5b3ef46ad54ea217e7dd0891372770bb92b55db92"
 
 inherit autotools systemd pkgconfig perlnative
 
