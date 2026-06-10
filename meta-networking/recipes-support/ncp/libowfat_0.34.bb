@@ -11,8 +11,8 @@ SRC_URI = "http://www.fefe.de/${BPN}/${BP}.tar.xz \
            file://0001-replace-__pure__-with-compiler-attribute-pure.patch \
            file://0001-fix-incompatible-type-error-with-gcc-15.patch \
           "
-SRC_URI[md5sum] = "ee015ccf45cb2bc61c942642038c2bdc"
-SRC_URI[sha256sum] = "f4b9b3d9922dc25bc93adedf9e9ff8ddbebaf623f14c8e7a5f2301bfef7998c1"
+SRC_URI[md5sum] = "ca7ca7c14e66cc148ac663a29126f4d0"
+SRC_URI[sha256sum] = "d4330d373ac9581b397bc24a22ad1f7f5d58a7fe36d9d239fe352ceffc5d304b"
 
 EXTRA_OEMAKE = "\
     DIET= \
