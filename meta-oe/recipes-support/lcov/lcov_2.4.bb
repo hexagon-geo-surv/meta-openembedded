@@ -51,7 +51,7 @@ RDEPENDS:${PN}:append:class-target = " \
     gcov-symlinks \
 "
 SRC_URI = "https://github.com/linux-test-project/lcov/releases/download/v${PV}/lcov-${PV}.tar.gz"
-SRC_URI[sha256sum] = "987031ad5528c8a746d4b52b380bc1bffe412de1f2b9c2ba5224995668e3240b"
+SRC_URI[sha256sum] = "3457825c6b2fe4ef77c782b82a23875c84a3c955243823f05d8f2dec0d455820"
 
 UPSTREAM_CHECK_URI = "https://github.com/linux-test-project/lcov/releases"
 UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
