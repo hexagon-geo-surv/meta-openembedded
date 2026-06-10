@@ -1,16 +1,16 @@
 SUMMARY = "Generic USB CCID smart card reader driver"
 HOMEPAGE = "https://ccid.apdu.fr/"
 LICENSE = "LGPL-2.1-or-later"
-LIC_FILES_CHKSUM = "file://COPYING;md5=2d5025d4aa3495befef8f17206a5b0a1"
+LIC_FILES_CHKSUM = "file://COPYING;md5=4bf661c1e3793e55c8d1051bc5e0ae21"
 
 DEPENDS = "autoconf-archive-native virtual/libusb0 pcsc-lite"
 RDEPENDS:${PN} = "pcsc-lite"
 
-SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.bz2 \
+SRC_URI = "https://ccid.apdu.fr/files/ccid-${PV}.tar.xz \
     file://0001-Add-build-rule-for-README.patch \
 "
 
-SRC_URI[sha256sum] = "194708f75fe369d45dd7c15e8b3e8a7db8b49cfc5557574ca2a2e76ef12ca0ca"
+SRC_URI[sha256sum] = "531dc29e7c1b9e22e1918f0767b625d52ce8a98f266eb2144c5cf5dbd29c0f67"
 
 inherit autotools pkgconfig
 
