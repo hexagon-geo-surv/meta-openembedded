@@ -7,8 +7,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 DEPENDS = "autoconf-archive bison-native glib-2.0 libnl zlib bison-native"
 
 SRC_URI = "https://github.com/NetworkBlockDevice/${BPN}/releases/download/${BP}/${BP}.tar.xz \
-           file://f0418b0d8b54c21a1e5b0c6dce3277e938d07e7c.patch \
-           file://0001-nbd-client-Fix-build-on-musl-gcc14.patch \
            "
 SRC_URI[sha256sum] = "422a02adcdbab01c622307c6babeda5c84ca6c6f2d4e0b29936e6ae9b6a7662f"
 
