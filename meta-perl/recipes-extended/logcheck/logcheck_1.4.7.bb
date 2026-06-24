@@ -25,7 +25,7 @@ GROUPADD_PARAM:${PN} = "-r ${BPN}"
 
 do_install() {
     # Fix QA Issue
-    sed -i '/install -d $(DESTDIR)\/var\/lock\/logcheck/s/^/#/' Makefile
+    sed -i '/install -d $(DESTDIR)\/run\/lock\/logcheck/s/^/#/' Makefile
 
     # "make install" do not install the manpages. Install them manually.
     install -m 755 -d ${D}${mandir}/man1
