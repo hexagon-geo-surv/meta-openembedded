@@ -13,7 +13,7 @@ file/line number reporting, and general logging of statistics."
 HOMEPAGE = "http://dmalloc.com/"
 LICENSE = "CC-BY-SA-3.0"
 
-LIC_FILES_CHKSUM = "file://dmalloc.c;beginline=4;endline=17;md5=83d13664f87f1f1a3b6b2b6f6eba85aa"
+LIC_FILES_CHKSUM = "file://dmalloc.c;beginline=4;endline=17;md5=26436803f036fe80336e29531eca3169"
 
 SECTION = "libs"
 
