@@ -16,10 +16,9 @@ SRC_URI = "https://github.com/lsh123/xmlsec/releases/download/${PV}/${BP}.tar.gz
            file://0001-force-to-use-our-own-libtool.patch \
            file://0002-change-finding-path-of-nss-and-nspr.patch \
            file://0003-xmlsec1-add-new-recipe.patch \
-           file://0004-examples-allow-build-in-separate-dir.patch \
            file://0005-nss-nspr-fix-for-multilib.patch \
            file://0006-xmlsec1-Fix-configure-QA-error-caused-by-host-lookup.patch \
-           file://0007-xmlsec-examples-Fix-LibXML2-deprecation-warnings-and.patch \
+           file://0008-unit_tests-guard-xmlDebugDumpDocument-with-LIBXML_DEB.patch \
            file://run-ptest \
            "
 
