@@ -8,14 +8,11 @@ LIC_FILES_CHKSUM = "file://doc/LICENSE;md5=aaa8b7bfb03da19eee6187365c352a80"
 SRC_URI = "https://downloads.uls.co.za/rp-pppoe/rp-pppoe-${PV}.tar.gz \
            file://top-autoconf.patch \
            file://configure_in_cross.patch \
-           file://update-config.patch \
            file://discard-use-of-dnl-in-Makefile.am.patch \
            file://configure.patch \
            file://pppoe-server.default \
            file://pppoe-server.init \
            file://pppoe-server.service \
-           file://0001-ppoe-Dont-include-linux-if_ether.h.patch \
-           file://0002-Enable-support-for-the-kernel-module.patch \
            "
 
 SRC_URI[sha256sum] = "41ac34e5db4482f7a558780d3b897bdbb21fae3fef4645d2852c3c0c19d81cea"
