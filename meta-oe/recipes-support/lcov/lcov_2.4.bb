@@ -58,6 +58,11 @@ UPSTREAM_CHECK_REGEX = "(?P<pver>\d+(\.\d+)+)"
 
 do_install() {
     oe_runmake install PREFIX=${D}${prefix} CFG_DIR=${D}${sysconfdir} LCOV_PERL_PATH="/usr/bin/env perl"
+
+    # The upstream test suite is shipped under ${datadir}/lcov/tests and is
+    # not needed at runtime. Its shell scripts pull in unwanted file-rdeps on
+    # /bin/bash, /usr/bin/bash and /bin/env, so drop it from the package.
+    rm -rf ${D}${datadir}/lcov/tests
 }
 
 BBCLASSEXTEND = "native nativesdk"
