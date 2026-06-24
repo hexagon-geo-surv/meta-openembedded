@@ -5,7 +5,7 @@ DESCRIPTION = "Cross-platform, efficient, customizable, and robust \
 HOMEPAGE = "https://stiffstream.com/en/products/restinio.html"
 SECTION = "libs"
 LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=f399b62ce0a152525d1589a5a40c0ff6"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=bfe2747443b7875eaaaa94b55b611f49"
 DEPENDS = "asio fmt http-parser"
 
 SRC_URI = "https://github.com/Stiffstream/restinio/releases/download/v.${PV}/${BP}.tar.bz2"
