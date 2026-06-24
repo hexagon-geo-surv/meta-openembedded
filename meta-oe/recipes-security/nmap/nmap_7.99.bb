@@ -6,12 +6,11 @@ LICENSE = "NPSL"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=895af8527fe4bcb72f271fd1841fd2f6"
 
 SRC_URI = "http://nmap.org/dist/${BP}.tar.bz2 \
-           file://nmap-redefine-the-python-library-dir.patch \
            file://nmap-replace-shtool-mkdir-with-coreutils-mkdir-command.patch \
            file://0001-Include-time.h-header-to-pass-clang-compilation.patch \
            file://0002-Fix-building-with-libc.patch \
-           file://0003-Fix-off-by-one-overflow-in-the-IP-protocol-table.patch \
            file://0001-fix-racing-between-build-ncat-and-build-lua.patch \
+           file://0004-libdnet-fix-PF_PACKET-conftest-nested-function.patch \
            "
 SRC_URI[sha256sum] = "df512492ffd108e53a27a06f26d8635bbe89e0e569455dc8ffef058c035d51b2"
 
@@ -39,6 +38,17 @@ EXTRA_OECONF = "--with-libdnet=included --with-liblinear=included --without-subv
 # it also only works with python2
 # disable for now until py3 is supported
 EXTRA_OECONF += "--without-zenmap"
+
+# nmap links the bundled libdnet statically (libdnet-stripped/src/.libs/libdnet.a),
+# but OE's default --disable-static propagates into that libtool sub-package
+# (last on the command line, so it wins) and only the shared library is built.
+# Drop --disable-static so libtool also produces libdnet.a.
+DISABLE_STATIC = ""
+
+# nmap's top-level Makefile does not order the link of nmap/nping after the
+# recursive build of the bundled libdnet, so a parallel build can try to link
+# against libdnet-stripped/src/.libs/libdnet.a before it exists. Serialize.
+PARALLEL_MAKE = ""
 
 export PYTHON_SITEPACKAGES_DIR
 
