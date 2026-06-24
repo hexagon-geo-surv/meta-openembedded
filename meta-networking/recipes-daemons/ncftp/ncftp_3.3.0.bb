@@ -9,8 +9,8 @@ SRC_URI = "https://www.ncftp.com/public_ftp/ncftp/${BP}-src.tar.gz \
            file://ncftp-configure-use-BUILD_CC-for-ccdv.patch \
            file://unistd.patch \
            file://0001-Forward-port-defining-PREFIX_BINDIR-to-use-new-autoc.patch \
-           file://0001-ncftp-3.2.7-fix-gcc14.patch \
            file://0002-ncftp-3.2.7-fix-clang.patch \
+           file://0003-aclocal-fix-AC_LANG-usage-for-autoconf-2.73.patch \
            "
 SRC_URI[sha256sum] = "7920f884c2adafc82c8e41c46d6f3d22698785c7b3f56f5677a8d5c866396386"
 
