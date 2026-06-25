@@ -1,0 +1,44 @@
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 25 Jun 2026 00:00:00 +0000
+Subject: [PATCH] PEGTL: fix demangle() static_assert with GCC 16
+
+The bundled PEGTL parses __PRETTY_FUNCTION__ at compile time to demangle
+type names. Older GCC emits
+
+  ...[with T = X; std::string_view = std::basic_string_view<char>]
+
+so the code locates the end of the type name via rfind(';'). GCC 16 no
+longer emits the trailing "; std::string_view = ..." alias and produces
+
+  ...[with T = X]
+
+which makes rfind(';') return npos and trips:
+
+  src/ThirdParty/PEGTL/include/tao/pegtl/demangle.hpp:118:23:
+  error: static assertion failed
+
+Fall back to the closing ']' when no ';' is present so both old and new
+GCC __PRETTY_FUNCTION__ layouts work.
+
+Upstream-Status: Pending
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ src/ThirdParty/PEGTL/include/tao/pegtl/demangle.hpp | 6 +++++-
+ 1 file changed, 5 insertions(+), 1 deletion(-)
+
+--- a/src/ThirdParty/PEGTL/include/tao/pegtl/demangle.hpp
++++ b/src/ThirdParty/PEGTL/include/tao/pegtl/demangle.hpp
+@@ -114,7 +114,11 @@
+    constexpr auto begin = sv.find( '=' );
+    static_assert( begin != std::string_view::npos );
+    constexpr auto tmp = sv.substr( begin + 2 );
+-   constexpr auto end = tmp.rfind( ';' );
++   // Older GCC emits "...[with T = X; std::string_view = ...]", newer GCC
++   // (16+) drops the trailing "; std::string_view = ..." alias and emits
++   // "...[with T = X]". Cope with both by falling back to the closing ']'.
++   constexpr auto semi = tmp.rfind( ';' );
++   constexpr auto end = ( semi != std::string_view::npos ) ? semi : tmp.rfind( ']' );
+    static_assert( end != std::string_view::npos );
+    return tmp.substr( 0, end );
+ }
