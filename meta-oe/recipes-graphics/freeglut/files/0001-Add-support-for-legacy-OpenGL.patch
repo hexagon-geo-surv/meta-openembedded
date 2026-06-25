@@ -3,16 +3,28 @@ From: Jan Vermaete <jan.vermaete@gmail.com>
 Date: Wed, 24 Dec 2025 12:58:36 +0100
 Subject: [PATCH 1/1] Add support for legacy OpenGL
 
+Link the legacy OpenGL::GL target (mesa libGL) instead of the GLVND
+OpenGL::OpenGL target (libOpenGL.so), and stop requiring the GLVND
+"OpenGL" component in the X11 path. Without the glvnd distro feature
+libglvnd is not built, so FIND_PACKAGE(OpenGL REQUIRED COMPONENTS OpenGL)
+fails with:
+
+  Could NOT find OpenGL (missing: OPENGL_opengl_LIBRARY)
+
+The X11 branch already links OpenGL::GL, so drop the unsatisfiable
+COMPONENTS request there too.
+
 Upstream-Status: Pending
 
 Signed-off-by: Rob Woolley <rob.woolley@windriver.com>
 Commited-by: Jan Vermaete <jan.vermaete@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- CMakeLists.txt | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ CMakeLists.txt | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 23741bf..31b3ac8 100644
+index 23741bf..4668159 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -378,13 +378,13 @@ IF(FREEGLUT_GLES)
@@ -31,6 +43,15 @@ index 23741bf..31b3ac8 100644
      else()
        FIND_PACKAGE(OpenGL REQUIRED)
        LIST(GET ${OPENGL_LIBRARIES} 0 _OPENGL_LIB)
+@@ -407,7 +407,7 @@ ELSE()
+     endif()
+
+     if(NOT CMAKE_VERSION VERSION_LESS "3.10")
+-      FIND_PACKAGE(OpenGL REQUIRED COMPONENTS OpenGL)
++      FIND_PACKAGE(OpenGL REQUIRED)
+       LIST(APPEND LIBS OpenGL::GL)
+     else()
+       FIND_PACKAGE(OpenGL REQUIRED)
 @@ -433,7 +433,7 @@ IF(FREEGLUT_WAYLAND)
    INCLUDE(FindPkgConfig)
    if(NOT CMAKE_VERSION VERSION_LESS "3.10")
@@ -40,6 +61,5 @@ index 23741bf..31b3ac8 100644
    else()
      FIND_PACKAGE(OpenGL REQUIRED)
      LIST(GET ${OPENGL_LIBRARIES} 0 _OPENGL_LIB)
--- 
+--
 2.47.3
-
