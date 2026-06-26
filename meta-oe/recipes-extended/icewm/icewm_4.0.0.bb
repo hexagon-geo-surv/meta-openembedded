@@ -21,7 +21,7 @@ EXTRA_OECONF += "--with-libdir=${datadir}/icewm \
                 --enable-shape"
 
 DEPENDS = "asciidoc-native fontconfig fribidi gdk-pixbuf imlib2 libxft libxpm libxrandr \
-    libxinerama libice libsm libx11 libxext libxrender libxcomposite libxdamage \
+    libxinerama libice libsm libx11 libxext libxrender libxcomposite libxcursor libxdamage \
     libxfixes"
 DEPENDS:append = " qemu-native"
 RDEPENDS:${PN} = "perl fribidi imlib2 imlib2-loaders"
